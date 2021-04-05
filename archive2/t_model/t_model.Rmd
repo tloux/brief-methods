@@ -1,0 +1,91 @@
+---
+title: "$t$ model"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+date: 'Date: `r format(Sys.time(), "%Y-%m-%d")`'
+---
+
+# What it is
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="A $t$ model with df=3 (black curve) compared to a Z model (blue curve)."}
+par(mar=c(2, 1, 1, 1))
+curve(dnorm, from=-4, to=4, col='blue', 
+      xlab='', 
+      yaxt='n', ylab='', frame=FALSE)
+curve(dt(x,df=3), from=-4, to=4, lwd=2, 
+      add=TRUE)
+abline(h=0, col='grey')
+```
+
+The $t$ model is a modification of the normal model which is often used in practice when dealing with observed data. Like the standard normal model $Z$, $t$, is symmetric around 0. Compared to $Z$, $t$ models have "heavier tails," meaning there is more probability in the areas away from 0.
+
+
+# When to use it
+
+The $t$ model is most often used when performing statistical inference (confidence interval and hypothesis tests) using a statistics which is theoretically normally distributed. We use $t$ instead of a normal model when we do not know the values of the parameters, especially the population standard deviation, $\sigma$. We see the $t$ model most often when performing inference for (a) a single mean, (b) the difference between two means (independent or paired samples), and (c) linear regression coefficients.
+
+
+# How to use it
+
+The $t$ model has a parameter called the *degrees of freedom* ($df$). Calculations for $df$ are usually pretty simple, but they depend on the context of the problem. The table below gives the formulas for calculating $df$ in the cases outlined above:
+
+Case    Parameter                                                           $df$
+------  -----------                                                         ------
+(a)     Single mean: $\mu$                                                  $n-1$
+(b-1)   Difference between two means, independent samples: $\mu_1 - \mu_2$  $\min\{n_1, n_2\}-1^{(1)}$
+(b-2)   Difference between two mean, paired samples: $\mu_d$                $n_d-1^{(2)}$
+(c)     Linear regression coefficient: ($\beta_j$)                          $n-p-1^{(3)}$
+
+In the table, (1) $n_1$ and $n_2$ are the sizes of samples 1 and 2, respectively; (2) $n_d$ is the number of paired differences; and (3) $p$ is the number of predictors in the regression model.
+
+To get critical values in R, use the function `qt()`. For example, suppose you have a sample size of 50 observations and want to compute a 95% confidence interval for $\mu$. The correct critical $t$ value would be^[To obtain the middle $1-\alpha$ of a distribution, you want $\pm$ the $1-\alpha/2$ quantile.]
+
+```{r}
+qt(0.975, df=49)
+```
+
+Or, say you have two samples, one of size 70 and the other of size 90, and you want to compare the two means. A 90% confidence interval would use the critical $t$^[To get $df$, take the smaller sample size, 70, and subtract 1.]
+
+```{r}
+qt(0.95, df=69)
+```
+
+
+# Why it works
+
+For simplicity, let's stick with to the context of estimating a single population mean. The Central Limit Theorem says that for a large sample, $\bar{y}$ is approximately normally distributed and that
+
+$$
+\frac{\bar{y} - \mu}{\sigma/\sqrt{n}} \sim Z
+$$
+
+However, $\sigma$ is the *population* standard deviation, which we do not know. We can replace $\sigma$ with its estimate, $s$. The new statistic is no longer a $Z$ distribution, but a $t$ distribution:^[To really get into the weeds, $t$ is defined theoretically as $t = \frac{Z}{\sqrt{X/df}}$, where $Z$ is a standard normal distribution and $X$ is a chi-squared distribution with $df$ degrees of freedom (It turns out that $(n-1)s^2/\sigma$ has a chi-squared distribution with $n-1$ degrees of freedom).]
+
+$$
+\frac{\bar{y} - \mu}{s/\sqrt{n}} \sim t^{(df)}
+$$
+
+This substitution of $s$ for $\sigma$ adds extra uncertainty and variability to our statistic, leading to the heavier tails described earlier.
+
+The degrees of freedom for the $t$ model are a measure of the accuracy of $s$ in estimating $\sigma$. The larger the degrees of freedom, the better estimate $s$ is of $\sigma$ and the less uncertainty there is in that substitution. This means that $t$ models with larger $df$ look much more like a normal model. In fact, $t \rightarrow Z$ as $df \rightarrow \infty$:
+
+```{r, echo=FALSE, fig.height=1.6, fig.width=3, fig.cap="The $t$ model approaches $Z$ as degrees of freedom get larger."}
+par(mar=c(2, 1, 1, 1))
+curve(dnorm, from=-4, to=4, col='blue', 
+      xaxt='n', xlab='', 
+      yaxt='n', ylab='', frame=FALSE)
+curve(dt(x,df=3), from=-4, to=4, 
+      add=TRUE)
+curve(dt(x,df=5), from=-4, to=4, col='darkgreen', 
+      add=TRUE)
+curve(dt(x,df=10), from=-4, to=4, col='brown1', 
+      add=TRUE)
+axis(side=1, at=-4:4, cex.axis=0.5)
+abline(h=0, col='grey')
+legend(x='topright', 
+       lwd=1, 
+       col=c('blue', 'brown1', 'darkgreen', 'black'), 
+       legend=c('Z', 't, df=10', 't, df=5', 't, df=3'), 
+       bty='n', cex=0.5)
+```

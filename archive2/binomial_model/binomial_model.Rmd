@@ -1,0 +1,74 @@
+---
+title: "Binomial model"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+date: 'Date: `r format(Sys.time(), "%Y-%m-%d")`'
+---
+
+```{r, echo=FALSE, warning=FALSE}
+library(knitr)
+library(tufte)
+load('brfss_2015_subset.RData')
+```
+
+# What it is
+
+The binomial model is a model to calculate the probability of a certain number (or proportion) of outcomes occurring in a sample.
+
+
+# When to use it
+
+If:
+
+- The sample size ($n$) is fixed
+- The outcome is a binary categorization (yes/no)
+- The observations are independent from one another
+- The observations have the same probability of outcome ($p$)
+- $Y$ counts the number of outcomes
+
+Then $Y$ fits the binomial model.
+
+
+# How to use it
+
+Given the parameters $n$ and $p$, the probability of $y$ outcomes in a sample is:^[For example, if $n=5$ and $p=0.2$, then $$P(Y=y)={5\choose 3}0.2^y 0.8^{5-y}$$ for values $y = 0, 1, 2, 3, 4, 5$.]
+
+$$P(Y=y) = {n \choose y}p^y(1-p)^{n-y}$$
+
+for $y = 0, 1, 2, \ldots, n$ and $P(Y=y) = 0$ otherwise.
+
+In R, these probabilities can be computed using the `dbinom()` function:
+
+```{r, eval=FALSE}
+dbinom(x=y, size=n, prob=p)
+```
+
+When $Y$ is modeled as binomial,
+
+- $E(Y) = np$
+- $Var(Y) = np(1-p)$
+- $SD(Y) = \sqrt{np(1-p)}$
+
+
+# Why it works
+
+The binomial model arises from the independence^[If $A$ and $B$ are independent, then $P(A,B) = P(A)\times P(B)$] of observations.
+
+Let's say $n=5$, $p=0.6$, and we want $P(Y=2)$. There are a few of possibilities^[1 is an observation with outcome, 0 is an observation without an outcome]:
+
+-------  -------  -------  -------
+ 11000    10001    01001    00011
+ 10100    01100    00110
+ 10010    01010    00101
+ ------  -------  -------  -------
+ 
+ The probability of each of these sequences is $0.6\times 0.6\times 0.4\times 0.4\times 0.4=0.6^2 0.4^3 = p^y (1-p)^{n-y}$
+ 
+ Since there are 10 sequences, the total probability is $10\times0.6^2 0.4^2$
+ 
+ The 10 comes from counting the sequences, or using the **combinations** formula $${n choose y} = \frac{n!}{y!(n-y)!}$$
+ 
+ So, every sequence has probability $p^y (1-p)^{n-y}$ and there are ${n \choose y}$ sequences, giving a consistent formula regardless of $n$ or $p$:
+ 
+ $$P(Y=y) = {n \choose y}p^y(1-p)^{n-y}$$

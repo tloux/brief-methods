@@ -1,0 +1,45 @@
+---
+title: "Brief Methods Topic List"
+author: "Travis Loux"
+date: '`r format(Sys.time(), "%Y-%m-%d")`'
+output: html_document
+---
+
+- Introduction
+
+### Probability
+- Binomial model **[draft]**
+- Normal model
+- $\chi^2$ model
+- $t$ model **[done]**
+- $F$ model
+
+### General Methods
+- Central Limit Theorem
+- Standardization
+- Confidence intervals
+- Hypothesis tests
+
+### Categorical data
+- Confidence interval for $p$ **[done]**
+- Hypothesis test for $p$ **[done]**
+- Risk ratio
+- Odds ratio
+- $\chi^2$ test for independence **[done]**
+
+### Numerical data
+- Confidence interval for $\mu$ **[done]**
+- Bootstrap confidence interval for $\mu$
+- Independent samples $t$ test **[done]**
+- Paired samples $t$ test **[drafted]**
+- Randomization test
+- One-way ANOVA **[done]**
+- ANOVA post-hoc tests (Bonferroni)
+- False discovery rate
+
+### Modeling and prediction
+- Correlation
+- Least squares regression
+- Regression diagnostics
+- Regression inference
+- LOESS regression

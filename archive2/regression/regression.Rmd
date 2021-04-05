@@ -1,0 +1,59 @@
+---
+title: "Simple Linear Regression"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+date: 'Date: `r format(Sys.time(), "%Y-%m-%d")`'
+---
+
+```{r, echo=FALSE, warning=FALSE}
+library(knitr)
+library(tufte)
+load('../brfss_2015_subset.RData')
+```
+
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width=100)
+```
+
+
+# What it is
+
+In its simplest form, simple linear regression is used to predict the value of a numerical **outcome**^[Also called the "response" or "dependent variable"] ($y$) from a numerical **predictor**^[Also called the "explanatory variable" or "independent variable"] ($x$). The predicted value $\hat{y}$ will have the smallest squared error $(y_i - \bar{y})^2$ of any linear predictor based on only $x$.
+
+
+# When to use it
+
+Linear regression is used to estimate the functional form of a linear relationship between two variables^[As opposed to correlation, which estimates the *strength* of the relationship]. In other words, it estimates the slope and intercept of the line that best represents the trend between the variables. As with most statistical methods, we make some simplifying assumptions when using simple linear regression which should be checked before the regression model is put forth as a potential solution^[See *Regression Diagnostics*]. These assumptions are:
+
+1. There is a linear trend in the data
+2. Errors/residuals are normally distributed
+3. Errors/residuals have a constand variance across the range of $x$ and $y$.
+
+
+# How to use it
+
+To run a linear regression in R, use the `lm()` function^[`lm` stands for "**l**inear **m**odel."]. The regression variables should be included in a formula of the form `y ~ x`, along with the data set. The regression model is then saved for future use. For example, if we want to use height to predict weight, we would use
+
+```{r}
+myreg = lm(weight ~ height, data=d)
+```
+
+Most information you would want from the regression model can be obtained through the `summary()` function. This output will include intercept and slope calculations with hypothesis tests for each, the residual standard deviation, $R^2$, and an $F$ test for model fit:
+
+```{r}
+summary(myreg)
+```
+
+The output above tells us the estimated regression model is
+
+$$
+weight = -180.845 + 5.351(height)
+$$
+
+and the residuals have a standard deviation of 42.51.
+
+
+# Why it works
+

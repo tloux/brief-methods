@@ -1,0 +1,57 @@
+---
+title: "Normal model"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+date: 'Date: `r format(Sys.time(), "%Y-%m-%d")`'
+---
+
+# What it is
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="A normal model with mean 0 and standard deviation 1."}
+par(mar=c(2, 1, 1, 1))
+curve(dnorm, from=-4, to=4, lwd=2, 
+      xlab='', 
+      yaxt='n', ylab='', frame=FALSE)
+abline(h=0, col='grey')
+```
+
+The normal model is the ubiquitous "bell-shaped curve" that is one example of a model for continuous data. The normal model is symmetric and peaks at the mean.
+
+
+# When to use it
+
+The normal model is a common one in statistical inference. The CLT shows that for large samples, the totals and averages of observations follow approximately a normal model (see *Why it works*). In addition, many biological and psychological measurements (height, IQ, test scores) follow normal models.
+
+
+# How to use it
+
+The **Empirical Rule** can be useful to make quick estimates. It states that for a normal model, 68% of the probability falls within 1 standard deviation of the mean, 95% falls within 2 standard deviations of the mean, and 99.7% falls within three standard deviations of the mean.
+
+To compute normal probabilities in R, use the `pnorm()` function. If $Y$ is modeled by a normal model with mean $m$ and standard deviation $s$, then $P(Y\leq y)=$ `pnorm(q=y, mean=m, sd=s)`. Multiple `pnorm`s can be used to find other types of areas. For example, say the mean is $m=100$ and standard deviation is $s=15$^[This is approximately the distribution of IQ scores in adults]. Then 
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="P(90 < Y < 120) = P(Y < 120) - P(Y < 90)."}
+par(mar=c(2, 1, 1, 1))
+curve(dnorm(x, mean=100, sd=15), from=60, to=140, lwd=2, 
+      xlab='', 
+      yaxt='n', ylab='', frame=FALSE)
+x1 = seq(60, 120, 0.01)
+y1 = dnorm(x1, mean=100, sd=15)
+polygon(x=c(60,x1,120), y=c(0,y1,0), col='lightblue', border='slateblue', lwd=2)
+x2 = seq(60, 90, 0.01)
+y2 = dnorm(x2, mean=100, sd=15)
+polygon(x=c(60,x2,90), y=c(0,y2,0), col='white', border='transparent', density=10, angle=-45, lwd=2)
+abline(h=0, col='grey')
+```
+
+```{r}
+# P(90 < Y < 120) 
+pnorm(q=120, mean=100, sd=15) - pnorm(q=90, mean=100, sd=15)
+
+# P(Y > 130)
+1 - pnorm(q=130, mean=100, sd=15)
+```
+
+
+# Why it works
+
