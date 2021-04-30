@@ -1,8 +1,5 @@
 ---
 title: "Brief Methods Topics"
-output: 
-  html_document: 
-    keep_md: yes
 ---
 
 # Numerical Data
@@ -16,22 +13,22 @@ output:
 
 ## One sample
 
-- Confidence interval for $\mu$ *In progress: archive 1, 2*
+- Confidence interval for $\mu$ **DONE**
 - Hypothesis test for $\mu$
 
 ## Two samples
 
-- Independent samples $t$ test *In progress: archive 1*
-- Paired samples $t$ test *In progress: archive 2*
+- Independent samples $t$ test *In progress (archive 1)*
+- Paired samples $t$ test *In progress (archive 2)*
 
 ## Multiple samples
 
-- ANOVA *In progress: archive 1, 2*
+- ANOVA *In progress (archive 1, 2)*
 
 ## Statistical models
 
-- Correlation *In progress: archive 2*
-- Simple linear regression *In progress: archive 2*
+- Correlation *In progress (archive 2)*
+- Simple linear regression *In progress (archive 2)*
 
 
 # Categorical Data
@@ -44,8 +41,8 @@ output:
 ## One sample
 
 - Counts, proportions, and percentages
-- Confidence interval for $p$ *In progress: archive 2*
-- Hypothesis test for $p$ *In progress: archive 2*
+- Confidence interval for $p$ *In progress (archive 2)*
+- Hypothesis test for $p$ *In progress (archive 2)*
 
 ## Two samples
 
@@ -55,7 +52,7 @@ output:
 
 ## Multiple samples
 
-- $\chi^2$ test *In progress: archive 1, 2*
+- $\chi^2$ test *In progress (archive 1, 2)*
 
 ## Statistical models
 
@@ -64,6 +61,6 @@ output:
 
 # Probability Models
 
-- Binomial model *In progress: archive 2*
-- Normal model *In progress: archive 2*
-- t model *In progress: archive 2*
+- Binomial model *In progress (archive 2)*
+- Normal model *In progress (archive 2)*
+- t model *In progress (archive 2)*

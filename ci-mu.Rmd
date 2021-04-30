@@ -1,0 +1,41 @@
+---
+title: "Confidence Interval for Population Mean"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+---
+
+```{r, echo=FALSE, warning=FALSE}
+load('data/brfss2019mo.RData')
+```
+
+# What it is
+
+In general, confidence intervals use observed data to give a range of values where a population parameter is thought to exist. In other words, they provide the range of potential parameter values which are *compatible* with the observed data. Confidence intervals for the population mean $\mu$ use the sample mean $\bar{y}$, standard deviation $s$, and sample size $n$ to build an interval for $\mu$ from the $t$ distribution.
+
+
+# When to use it
+
+The confidence interval for $\mu$ requires the conditions of the Central Limit Theorem. First, this means the data needs to be a random sample from the population. Additionally, the population should be normally distributed or the sample should be "large." The general rule of thumb is $n \geq 30$. If $n$ is less than 30 (or larger but not by much) a QQ plot can help assess how close to normal the data are and whether this method is appropriate.
+
+
+# How to use it
+
+In R, the confidence interval for $\mu$ is obtained most easily through the `t.test()` function. Suppose we want to estimate the average body mass index (BMI) of all adult Missourians. We can input the observed BMI data from our sample to `t.test()`. Appending `$conf.int` will return only the confidence interval^[See *Hypothesis Test for Population Mean* for more detail about the output of `t.test()`]:
+
+```{r}
+t.test(x=mydat$bmi, conf.level=0.95)$conf.int
+```
+
+So, from our data we are 95% confident that the average BMI of Missouri adults is somewhere between about 28.3 and 28.9 pounds. In other words, a true average BMI anywhere within that range would be compatible with the data we observed. On the other hand, we don't expect the true average BMI to be 27 or 30 because these values are outside the interval.
+
+We can change the confidence level by changing `conf.level` in the R code. For example, using `conf.level=0.90` will give a 90% confidence interval.
+
+
+# Why it works
+
+Here we will discuss how to correctly interpret a confidence interval^[For a more mathematical description of confidence intervals, see *Confidence Interval for Population Proportion*.].
+
+A 95% confidence interval gives a range of values for the true mean which are *compatible* with the observed data. We say we are "95% confident" the true mean is within the bounds of the interval. Though it seems like it would, this does not mean there is a 0.95 probability the mean is within the interval. Any one interval either *does* or *does not* include the true mean. The mean is a fixed value and once we've computed the interval, so is it. The mean either *is* or *is not* in the interval. No probabilities. We just don't know which one is true. Instead, we can think of the 95% confidence level as a long-run chance. *The process that we used to create the interval* will give an interval covering the true mean 95% of the time. This, of course, assumes that our assumptions are true. If we don't have a random sample or the sample size is too small, the interval may not (and probably won't) reach its stated confidence level.
+
+Confidence intervals are a good way to get a sense of uncertainty in an estimate. However, some statisticians have argued that a confidence level as high as 95% may actually impede our interpretation. Because 95% is so close to 100%, we might be overconfident about the range in our interval. These statisticians suggest a lower confidence level, like 50%, essentially to keep us humble when we interpret our intervals. Luckily, there's often no need to choose. You can usually report and/or graph two intervals simultaneously. This is a topic for another time.
