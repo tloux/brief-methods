@@ -40,8 +40,8 @@
 ### One sample
 
 - Counts, proportions, and percentages
-- Confidence interval for $p$ *In progress (archive 2)*
-- Hypothesis test for $p$ *In progress (archive 2)*
+- Confidence interval for $p$ **DONE**
+- Hypothesis test for $p$ **DONE**
 
 ### Two samples
 
