@@ -66,15 +66,14 @@ brfss2019mo$metro = tmp
 
 # BMI numeric
 
-tmp = ifelse(brfss2019mo$`_BMI5` %in% c(1,9999), NA, brfss2019mo$`_BMI5`)
-brfss2019mo$bmi = tmp / 100
+brfss2019mo$bmi = brfss2019mo$`_BMI5` / 100
 
 
 # BMI categorical
 
-tmp = factor(brfss2019mo$`_BMI5CAT`, levels=c(1:5), 
+tmp = factor(brfss2019mo$`_BMI5CAT`, levels=1:4, 
              labels=c('Underweight','Normal','Overweight',
-                      'Obese',NA),
+                      'Obese'),
              ordered=TRUE)
 brfss2019mo$bmicat = tmp
 

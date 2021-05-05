@@ -1,0 +1,95 @@
+---
+title: "Chi-Squared Test for Independence"
+output:
+  tufte::tufte_handout: default
+  tufte::tufte_html: default
+---
+
+```{r, echo=FALSE, warning=FALSE}
+load('data/brfss2019mo.RData')
+```
+
+# What it is
+
+```{r, echo=FALSE, fig.margin=TRUE, fig.cap="A chi-squared distribution with 3 degrees of freedom."}
+xmx = 10
+crit = 6
+x = seq(0, xmx, 0.001)
+y = dchisq(x, df=3)
+
+par(mar=c(2, 1, 1, 1))
+
+plot(x, y, type='l', xlab='', yaxt='n', ylab='', frame=FALSE)
+polygon(x=c(x[x>=crit], xmx, crit), y=c(y[x>=crit], 0, 0), 
+        col='lightblue', border='slateblue')
+lines(x, y)
+abline(h=0, col='grey')
+text(x=6, y=0.20, labels=expression(chi[(3)]^2), cex=2)
+```
+
+The $\chi^2$ test for independence (also called the $\chi^2$ test for homogeneity of proportions) investigates the relationship between two categorical variables (nominal or ordinal). Equivalently, we could say the test compares the distribution of one categorical variable across groups defined by a second categorical variable. The example below compares diabetes across metro status.
+
+
+# When to use it
+
+The $\chi^2$ test requires observations to be sampled independently as well as a large sample. The standard large sample rule of thumb is an expected count of at least 5 in each table cell (see *Why it Works* for details).
+
+
+# How to use it
+
+As with all tests, begin by stating the hypotheses:
+
+$H_0$: $X$ and $Y$ are independent.  
+$H_A$: $X$ and $Y$ are not independent.
+
+Equivalently, we could say
+
+$H_0$: $Y$ has the same distribution for all levels of $X$.  
+$H_A$: $Y$ does not have the same distribution for all levels of $X$.
+
+In `R`, create a two-way table using the `table()` function:
+
+```{r}
+tab = table(mydat$metro, mydat$diabetes)
+```
+
+which yields^[To view the row and column totals, use `addmargins(tab)`.]
+
+```{r, echo=FALSE}
+knitr::kable(tab)
+```
+
+Then pass the table to the `chisq.test()` function^[You want to use the initial table, not the table with the margins.]:
+
+```{r, eval=FALSE}
+chisq.test(tab)
+```
+
+The output gives you, in order, the test statistic ($X^2$ or `X-squared`), degrees of freedom, and p-value. More information is kept hidden and can be accessed by saving the test as a new object.
+
+
+# Why it works
+
+The $\chi^2$ test for independence is based on the concept of independence from probability theory^[If $A$ and $B$ are independent, then $P(A) = P(A \mid B)$, or the probability of $A$ is the same for every category defined by $B$.].
+
+Using `addmargins()`, we get
+
+```{r, echo=FALSE}
+knitr::kable(addmargins(tab))
+```
+
+Take, for example, urban residents with diabetes (Row 1, Column 1). By independence (assumed in $H_0$), the expected number of urban residents with diabetes is simply the number of urban residents times the probability of anyone in the sample (regardless of metro status) having diabetes^[In general, $E = \frac{(row\ total) \times (column\ total)}{n}$]:
+
+$$
+E_{urban\ with\ diabetes} = 283 \times \frac{149}{793} = 53
+$$
+
+We can do this for every cell in the table in the same way. For example, the expected number of rural residents with diabetes would be $312 \times \frac{149}{793} = 58$. For the $\chi^2$ tests to work well, each $E$ should be at least 5.^[To view the expected counts in R, use `chisq.test(tab)$expected`.]
+
+The test statistic then is calculated as
+
+$$X^2 = \sum_{all\ cells}{\frac{(O - E)^2}{E}}$$
+
+This is always positive. Additionally, the farther the observed $O$ is from the expected $E$ in each cell, the bigger $X^2$. Therefore, large values of $X^2$ provide evidence against the null hypothesis.
+
+The degrees of freedom affect the shape of the $\chi^2$ distribution and come from the minimum number of cells needed in order to fix the entire table with the given margin totals. For example, in the table above if urban and suburban diabetes counts are known, the rest of the values are fixed (urban no diabetes = 283 - urban diabetes; suburban no diabetes = 198 - suburban diabetes; rural diabetes = 149 - urban diabetes - suburban diabetes; etc.). Thus, $df=2$.

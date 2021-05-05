@@ -51,7 +51,7 @@
 
 ### Multiple samples
 
-- $\chi^2$ test *In progress (archive 1, 2)*
+- $\chi^2$ test **DONE**
 
 ### Statistical models
 
