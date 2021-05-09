@@ -17,7 +17,7 @@
 
 ### Two samples
 
-- Independent samples $t$ test *In progress (archive 1)*
+- Independent samples $t$ test **DONE**
 - Paired samples $t$ test *In progress (archive 2)*
 
 ### Multiple samples
