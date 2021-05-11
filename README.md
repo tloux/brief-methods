@@ -18,16 +18,16 @@
 ### Two samples
 
 - Independent samples $t$ test **DONE**
-- Paired samples $t$ test *In progress (archive 2)*
+- Paired samples $t$ test *In progress*
 
 ### Multiple samples
 
-- ANOVA *In progress (archive 1, 2)*
+- ANOVA **DONE**
 
 ### Statistical models
 
-- Correlation *In progress (archive 2)*
-- Simple linear regression *In progress (archive 2)*
+- Correlation *In progress*
+- Simple linear regression *In progress*
 
 
 ## Categorical Data
@@ -60,6 +60,6 @@
 
 ## Probability Models
 
-- Binomial model *In progress (archive 2)*
-- Normal model *In progress (archive 2)*
-- t model *In progress (archive 2)*
+- Binomial model *In progress*
+- Normal model *In progress*
+- t model *In progress*
