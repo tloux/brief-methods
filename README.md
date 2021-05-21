@@ -5,61 +5,81 @@
 
 ### Visualizations
 
-- Histograms
-- Boxplots
-- Density plots
-- Normal QQ plots
+- Histograms *Coming soon*
+- Boxplots *Coming soon*
+- Density plots *Coming soon*
+- Normal QQ plots *Coming soon*
+- Scatterplots *Coming soon*
 
 ### One sample
 
-- Confidence interval for $\mu$ **DONE**
-- Hypothesis test for $\mu$
+- Confidence interval for $\mu$
+- Hypothesis test for $\mu$ *Coming soon*
 
 ### Two samples
 
-- Independent samples $t$ test **DONE**
-- Paired samples $t$ test *In progress*
+- Independent samples $t$ test
+- Paired samples $t$ test *Coming soon*
 
 ### Multiple samples
 
-- ANOVA **DONE**
+- ANOVA
 
 ### Statistical models
 
-- Correlation *In progress*
-- Simple linear regression *In progress*
+- Correlation **DONE - need to update with new data**
+- Simple linear regression **DONE - need to update with new data**
+- Simple lineae regression diagnostics *Coming soon*
 
 
 ## Categorical Data
 
 ### Visualizations
 
-- Barplots
-- Pie charts
+- Barplots *Coming soon*
+- Pie charts *Coming soon*
 
 ### One sample
 
-- Counts, proportions, and percentages
-- Confidence interval for $p$ **DONE**
-- Hypothesis test for $p$ **DONE**
+- Counts, proportions, and percentages *Coming soon*
+- Confidence interval for $p$
+- Hypothesis test for $p$
 
 ### Two samples
 
-- Hypothesis test for $p_A - p_B$
-- Risk ratio
-- Odds ratio
+- Hypothesis test for $p_A - p_B$ *Coming soon*
+- Risk ratio *Coming soon*
+- Odds ratio *Coming soon*
 
 ### Multiple samples
 
-- $\chi^2$ test **DONE**
+- $\chi^2$ test
 
 ### Statistical models
 
-- Binary logistic regression
+- Binary logistic regression *Coming soon*
 
+
+<!-- OTHER TOPICS
 
 ## Probability Models
 
 - Binomial model *In progress*
 - Normal model *In progress*
 - t model *In progress*
+- $\chi^2$ model
+- $F$ model
+
+## General Methods
+
+- Central Limit Theorem
+- Standardization
+- Confidence intervals
+- Hypothesis tests
+
+- ANOVA post-hoc tests (Bonferroni)
+- False discovery rate
+
+- Bootstrap confidence interval for $\mu$
+
+-->
