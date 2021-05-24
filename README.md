@@ -27,8 +27,8 @@
 
 ### Statistical models
 
-- Correlation **DONE - need to update with new data**
-- Simple linear regression **DONE - need to update with new data**
+- Correlation
+- Simple linear regression
 - Simple lineae regression diagnostics *Coming soon*
 
 

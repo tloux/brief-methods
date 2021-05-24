@@ -16,7 +16,7 @@ In its simplest form, simple linear regression is used to predict the value of a
 
 # When to use it
 
-Simple linear regression is used to estimate the functional form of a linear relationship between two variables^[As opposed to correlation, which estimates the *strength* of the relationship]. It estimates the slope and intercept of the line that best represents the trend between the variables. As with most statistical methods, we make some simplifying assumptions when using simple linear regression which should be checked before the regression model is put forth as a potential solution^[See *Regression Diagnostics*]. These assumptions are:
+Simple linear regression is used to estimate the functional form of a linear relationship between two variables^[As opposed to correlation, which estimates the *strength* of the relationship]. It estimates the slope and intercept of the line that best represents the trend between the variables. As with most statistical methods, we make some simplifying assumptions when using simple linear regression which should be checked before the regression model is put forth as a potential solution. These assumptions are:
 
 1. There is a linear trend in the data
 2. Errors/residuals have a constant variance across the range of $x$ and $y$.
@@ -25,10 +25,10 @@ Simple linear regression is used to estimate the functional form of a linear rel
 
 # How to use it
 
-To run a linear regression in R, use the `lm()` function^[`lm` stands for "**l**inear **m**odel."]. The regression variables should be included in a formula of the form `y ~ x`, along with the data set. The regression model is then saved for future use. For example, if we want to use physical health to predict mental health, we would use
+To run a linear regression in R, use the `lm()` function^[`lm` stands for "**l**inear **m**odel."]. The regression variables should be included in a formula of the form `y ~ x`, along with the data set. The regression model is then saved for future use. For example, if we want to use height to predict weight, we would use
 
 ```{r}
-myreg = lm(menthealth ~ physhealth, data=mydat)
+myreg = lm(weight ~ height, data=mydat)
 ```
 
 Most information you would want from the regression model can be obtained through the `coef()` and `summary()` functions. The `coef` function simply gives the estimated intercept and slope while the `summary` function output will include intercept and slope calculations with hypothesis tests for each, the residual standard deviation, $R^2$, and an $F$ test for model fit^[The `summary(myreg)` example is omitted here because the output takes up about half a page]:
@@ -40,20 +40,20 @@ coef(myreg)
 The output above tells us the estimated regression model is
 
 $$
-menthealth = 2.53 + 0.28(physhealth)
+weight = -211 + 5.90(height)
 $$
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.margin=TRUE, fig.cap="Scatterplot with regression line included."}
 library(ggplot2)
-ggplot(data=mydat, aes(x=physhealth, y=menthealth)) + 
-  geom_point(alpha=0.3, position=position_jitter(width=0.5, height=0.5)) + 
+ggplot(data=mydat, aes(x=height, y=weight)) + 
+  geom_point(alpha=0.3, position=position_jitter(width=0.4)) + 
   stat_smooth(method='lm', se=FALSE) + 
-  xlab('Days in last 30 with poor physical health') + 
-  ylab('Days in last 30 with\npoor mental health') + 
+  xlab('Height (inches)') + 
+  ylab('Weight (pounds)') + 
   theme_minimal()
 ```
 
-So, it someone has had 10 poor physical health days in the past 30 days, our best guess for the number of poor mental health days they have had is $2.53 + 0.28(10) = 2.58 + 2.80 = 5.38$.
+So, it someone is 65 inches tall, our best guess for their weight is $-211 + 5.90(65) = 172.5$ pounds.
 
 
 # Why it works

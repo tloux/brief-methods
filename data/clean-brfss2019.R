@@ -8,10 +8,10 @@ brfss2019 = haven::read_xpt('LLCP2019.XPT')
 
 # subset missouri respondents specified variables =========
 
-myvars = c('_SEX', '_RACEGR3', '_AGEG5YR', '_AGE_G', 'MSCODE', '_BMI5', 
-           '_BMI5CAT', 'SMOKE100', 'DIABETE4', 'ADDEPEV3', 'GENHLTH', 
-           'PHYSHLTH', 'MENTHLTH', 'HLTHPLN1', 'MEDCOST', 'EXERANY2', 
-           '_RFDRHV7', 'FLUSHOT7', 'TRNSGNDR')
+myvars = c('_SEX', '_RACEGR3', '_AGEG5YR', '_AGE_G', 'MSCODE', 'HEIGHT3', 
+           'WEIGHT2', '_BMI5', '_BMI5CAT', 'SMOKE100', 'DIABETE4', 
+           'ADDEPEV3', 'GENHLTH', 'PHYSHLTH', 'MENTHLTH', 'HLTHPLN1', 
+           'MEDCOST', 'EXERANY2', '_RFDRHV7', 'FLUSHOT7', 'TRNSGNDR')
 
 col_ind = which(names(brfss2019) %in% myvars)
 
@@ -62,6 +62,22 @@ brfss2019mo$age6 = tmp
 tmp = factor(brfss2019mo$MSCODE, levels=c(1:3,5), 
              labels=c('Urban','Urban','Suburban','Rural'))
 brfss2019mo$metro = tmp
+
+
+# height
+
+myht = ifelse(brfss2019mo$HEIGHT3 > 1000, NA, brfss2019mo$HEIGHT3)
+
+htft = floor(myht / 100)
+htin = myht - htft*100
+
+brfss2019mo$height = htft*12 + htin
+
+
+# weight
+
+brfss2019mo$weight = ifelse(brfss2019mo$WEIGHT2 > 1000, 
+                            NA, brfss2019mo$WEIGHT2)
 
 
 # BMI numeric
@@ -166,7 +182,7 @@ brfss2019mo$transgender = tmp
 
 # select cleaned variables ================================
 
-mydat = as.data.frame(brfss2019mo[, 20:38])
+mydat = as.data.frame(brfss2019mo[, 22:42])
 
 
 
