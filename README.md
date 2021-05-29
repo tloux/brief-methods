@@ -3,23 +3,25 @@
 
 ## Numerical Data
 
+<!--
 ### Visualizations
 
-- Histograms *Coming soon*
-- Boxplots *Coming soon*
-- Density plots *Coming soon*
-- Normal QQ plots *Coming soon*
-- Scatterplots *Coming soon*
+- Histograms
+- Boxplots
+- Density plots
+- Normal QQ plots
+- Scatterplots
+-->
 
 ### One sample
 
-- Confidence interval for $\mu$
-- Hypothesis test for $\mu$ *Coming soon*
+- Confidence interval for mu
+<!-- - Hypothesis test for mu -->
 
 ### Two samples
 
-- Independent samples $t$ test
-- Paired samples $t$ test *Coming soon*
+- Independent samples t-test
+<!-- - Paired samples t-test -->
 
 ### Multiple samples
 
@@ -29,46 +31,50 @@
 
 - Correlation
 - Simple linear regression
-- Simple lineae regression diagnostics *Coming soon*
+<!-- - Simple linear regression diagnostics -->
 
 
 ## Categorical Data
 
+<!--
 ### Visualizations
 
-- Barplots *Coming soon*
-- Pie charts *Coming soon*
+- Barplots
+- Pie charts
+-->
 
 ### One sample
 
-- Counts, proportions, and percentages *Coming soon*
-- Confidence interval for $p$
-- Hypothesis test for $p$
+<!-- - Counts, proportions, and percentages -->
+- Confidence interval for p
+- Hypothesis test for p
 
 ### Two samples
 
-- Hypothesis test for $p_A - p_B$ *Coming soon*
-- Risk ratio *Coming soon*
-- Odds ratio *Coming soon*
+<!-- - Hypothesis test for $p_A - p_B$ -->
+<!-- - Risk ratio -->
+<!-- - Odds ratio -->
 
 ### Multiple samples
 
-- $\chi^2$ test
+- Chi-squared test
 
+<!--
 ### Statistical models
 
-- Binary logistic regression *Coming soon*
+- Binary logistic regression
+-->
 
 
 <!-- OTHER TOPICS
 
 ## Probability Models
 
-- Binomial model *In progress*
-- Normal model *In progress*
-- t model *In progress*
-- $\chi^2$ model
-- $F$ model
+- Binomial model
+- Normal model
+- t model
+- Chi-squared model
+- F model
 
 ## General Methods
 
@@ -80,6 +86,6 @@
 - ANOVA post-hoc tests (Bonferroni)
 - False discovery rate
 
-- Bootstrap confidence interval for $\mu$
+- Bootstrap confidence interval for mu
 
 -->
